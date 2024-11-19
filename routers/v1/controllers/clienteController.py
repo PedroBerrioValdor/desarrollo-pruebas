@@ -7,7 +7,10 @@ from schemas.cliente import ClienteSchema, ClienteSchemaGet
 from fastapi_utils.cbv import cbv
 from typing import List
 
-router = APIRouter()
+router = APIRouter(
+    tags=['cliente'],
+    prefix="/cliente"
+)
 
 @cbv(router)
 class ClienteController:
