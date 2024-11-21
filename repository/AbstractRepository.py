@@ -21,6 +21,9 @@ class AbstractRepository(ABC):
     def get_by_id(self, id:int, db:Session):
         return db.query(self.entity).filter(self.entity.id==id).one()
     
+    def get_by_matricula(self, matricula:str, db:Session):
+        return db.query(self.entity).filter(self.entity.matricula==matricula).one()
+    
     def add(self, entity, db:Session):
         db.add(entity)
         db.commit()

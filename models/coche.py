@@ -3,7 +3,7 @@ from config.db import Base
 
 class Coche(Base):
     __tablename__ = "coche"
-    id= Column(Integer,Identity(start=1,cycle=True), primary_key=True)
+    matricula= Column(String, primary_key=True)
     marca= Column(String)
     tipoAveria= Column(String)
     idCliente=Column(Integer,ForeignKey("cliente.id"),nullable=False)
