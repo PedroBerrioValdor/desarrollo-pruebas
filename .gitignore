@@ -1,2 +1,3 @@
 pruebasenv/
 __pycache__/
+.env
