@@ -9,3 +9,4 @@ class Cliente(Base):
     updated_at= Column(DateTime(timezone=True), onupdate=func.now())
     created_at= Column(DateTime(timezone=True), server_default=func.now())
     active= Column(Boolean,default=True)
+    rol= Column(String,default="Cliente")

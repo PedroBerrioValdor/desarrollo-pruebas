@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from schemas.cliente import ClienteSchema, ClienteSchemaGet
 from fastapi_utils.cbv import cbv
 from typing import List
+from config.user_depend import get_current_user
 
 router = APIRouter(
     tags=['cliente'],
@@ -23,7 +24,9 @@ class ClienteController:
         return clientes
     
     @router.get("/{id}", response_model=ClienteSchema, status_code=200)
-    def getClienteById(self,id, db:Session = Depends(get_db)):
+    def getClienteById(self,id,user: dict = Depends(get_current_user) ,db:Session = Depends(get_db)):
+        if user is None or user.get('user_role') != 'admin':
+            raise HTTPException(status_code=401, detail='Authentication failed')
         cliente = self.service.getCliente(id, db)
         if cliente is None:
             raise HTTPException(status_code=404, detail="Not Found")
